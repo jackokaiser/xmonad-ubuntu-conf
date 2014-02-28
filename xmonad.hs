@@ -15,6 +15,7 @@
 -}
 
 import XMonad
+import XMonad.Config.Azerty
 import XMonad.Hooks.SetWMName
 import XMonad.Layout.Grid
 import XMonad.Layout.ResizableTile
@@ -192,6 +193,10 @@ myLayouts =
 myKeyBindings =
   [
     ((myModMask, xK_b), sendMessage ToggleStruts)
+    -- launch a terminal
+    , ((myModMask, xK_t), spawn myTerminal)
+    , ((myModMask, xK_c), kill)
+    , ((myModMask, xK_o), windows W.focusDown)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_p), spawn "synapse")
