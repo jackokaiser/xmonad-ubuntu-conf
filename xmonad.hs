@@ -89,7 +89,7 @@ myWorkspaces =
   [
     "7:Chat",  "8:Dbg", "9:Pix",
     "4:Docs",  "5:Dev", "6:Web",
-    "1:Term",  "2:Hub", "3:Mail",
+    "1:Term",  "2:Serv", "3:Client",
     "0:VM",    "Extr1", "Extr2"
   ]
 
@@ -203,15 +203,30 @@ myKeyBindings =
     ((myModMask, xK_b), sendMessage ToggleStruts)
     -- launch a terminal
     , ((myModMask, xK_t), spawn myTerminal)
-    , ((myModMask, xK_c), kill)
+    , ((myModMask, xK_t), spawn myTerminal)
+    , ((myModMask, xK_k), kill)
     , ((myModMask, xK_o), windows W.focusDown)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
-    , ((myModMask, xK_p), spawn "synapse")
+    -- lock screen
+    , ((myModMask, xK_l), spawn "slock")
+    -- h and l hopefully
+    -- , ((myModMask, xK_e), sendMessage MirrorShrink)
+    -- , ((myModMask, xK_r), sendMessage MirrorExpand)
     , ((myModMask, xK_u), focusUrgent)
+    , ((myModMask, xK_F1), spawn "nautilus")
+    , ((myModMask, xK_F2), spawn "google-chrome")
+    , ((myModMask, xK_F3), spawn "synapse")
+    , ((myModMask, xK_F11), spawn "emacs")
+    , ((myModMask, xK_F12), spawn myTerminal)
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
+     --take a screenshot of entire display
+   , ((myModMask , xK_Print ), spawn "scrot screen_%Y-%m-%d-%H-%M-%S.png -d 1  -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
+
+   --take a screenshot of focused window
+   , ((myModMask .|. controlMask, xK_Print ), spawn "scrot window_%Y-%m-%d-%H-%M-%S.png -d 1-u -e ''mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
   ]
 
 
