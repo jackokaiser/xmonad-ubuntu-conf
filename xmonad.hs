@@ -31,6 +31,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Actions.Plane
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ICCCMFocus
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Ratio ((%))
@@ -45,7 +46,9 @@ myFocusedBorderColor = "#ff0000"      -- color of focused border
 myNormalBorderColor  = "#cccccc"      -- color of inactive border
 myBorderWidth        = 1              -- width of border around windows
 myTerminal           = "terminator"   -- which terminal software to use
-myIMRosterTitle      = "Contact List" -- title of roster on IM workspace
+myIMRosterTitle      = "Buddy List"   -- title of roster on IM workspace
+                                      -- use "Buddy List" for Pidgin, but
+                                      -- "Contact List" for Empathy
 
 
 {-
@@ -130,21 +133,21 @@ defaultLayouts = smartBorders(avoidStruts(
   -- active window, it will bring the active window to the front.
   ||| noBorders Full
 
-  -- Grid layout tries to equally distribute windows in the available
-  -- space, increasing the number of columns and rows as necessary.
-  -- Master window is at top left.
-  ||| Grid
-
   -- ThreeColMid layout puts the large master window in the center
   -- of the screen. As configured below, by default it takes of 3/4 of
   -- the available space. Remaining windows tile to both the left and
   -- right of the master window. You can resize using "super-h" and
   -- "super-l".
-  ||| ThreeColMid 1 (3/100) (3/4)
+  -- ||| ThreeColMid 1 (3/100) (3/4)
 
   -- Circle layout places the master window in the center of the screen.
   -- Remaining windows appear in a circle around it
-  ||| Circle))
+  -- ||| Circle
+
+  -- Grid layout tries to equally distribute windows in the available
+  -- space, increasing the number of columns and rows as necessary.
+  -- Master window is at top left.
+  ||| Grid))
 
 
 -- Here we define some layouts which will be assigned to specific
@@ -154,7 +157,7 @@ defaultLayouts = smartBorders(avoidStruts(
 -- up 1/8 of the screen vertically, and the remaining space contains
 -- chat windows which are tiled using the grid layout. The roster is
 -- identified using the myIMRosterTitle variable, and by default is
--- configured for Empathy, so if you're using something else you
+-- configured for Pidgin, so if you're using something else you
 -- will want to modify that variable.
 chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
 
@@ -348,7 +351,7 @@ myKeys = myKeyBindings ++
 {-
   Here we actually stitch together all the configuration settings
   and run xmonad. We also spawn an instance of xmobar and pipe
-  content into it via the logHook..
+  content into it via the logHook.
 -}
 
 main = do
@@ -369,7 +372,7 @@ main = do
   , manageHook = manageHook defaultConfig
       <+> composeAll myManagementHooks
       <+> manageDocks
-  , logHook = dynamicLogWithPP $ xmobarPP {
+  , logHook = takeTopFocus <+> dynamicLogWithPP xmobarPP {
       ppOutput = hPutStrLn xmproc
       , ppTitle = xmobarColor myTitleColor "" . shorten myTitleLength
       , ppCurrent = xmobarColor myCurrentWSColor ""

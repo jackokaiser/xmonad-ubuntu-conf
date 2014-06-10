@@ -1,14 +1,14 @@
 xmonad-ubuntu-conf
 ==================
 
-My xmonad config for Ubuntu 12.04, including package list, config files, and instructions.
+My xmonad config for Ubuntu 14.04 and 12.04, including package list, config files, and instructions. If you're still on Ubuntu 12.04, make sure to use the "precise" branch. The master branch is currently for 14.04.
 
 Overview
 --------
 
 What you're looking at is my personal xmonad configuration setup, heavily commented and organized as clearly as I could manage.
 
-I have been using some form of this setup on a daily basis for over a year now in my work as a web developer. An xmonad configuration usually ends up being a very individualized thing, but I thought it would be valuable to share this as a starting point for people new to xmonad. I know that when I was starting with xmonad I found reading other people's configuration files the best way to learn. I hope you will find this equally helpful.
+I have been using some form of this setup on a daily basis for over three years now in my work as a web developer. An xmonad configuration usually ends up being a very individualized thing, but I thought it would be valuable to share this as a starting point for people new to xmonad. I know that when I was starting with xmonad I found reading other people's configuration files the best way to learn. I hope you will find this equally helpful.
 
 This configuration has the following features and properties:
 * Lightweight standalone configuration, not intended to be run inside Gnome or XFCE.
@@ -34,7 +34,10 @@ Finally, this whole process is intended for someone who likes to mess with their
 
 ### Checkout repository ###
 
-As your first step, you should check out this github repository or download an archive of the files. The contents of the repository should be placed in your home directory in a folder called ".xmonad". Note that if you have already installed xmonad, this directory will already exist! If you want to be able to revert to your existing configuration, you should rename this directory to something like ".xmonad-original".
+
+As your first step, you should check out this github repository or download an archive of the files. If you're still on Ubuntu 12.04, make sure to use the "precise" branch. The master branch is currently for 14.04.
+
+The contents of the repository should be placed in your home directory in a folder called ".xmonad". Note that if you have already installed xmonad, this directory will already exist! If you want to be able to revert to your existing configuration, you should rename this directory to something like ".xmonad-original".
 
 ### Installation: the short version ###
 
@@ -44,13 +47,22 @@ I've provided a script which performs all the remaining operations lined out the
 
 If you prefer to perform these steps manually to understand what they are doing, read on.
 
+### Add Synapse PPA ###
+
+The configuration uses an application launcher called Synapse. Synapse used to be in the Ubuntu repositories as of 12.04 but is no longer there in 14.04. Apparently it was not updated to work with the appropriate versions of the libraries it uses in time for the release. Therefore, in order to keep synapse working, the install script adds a PPA with development builds of Synapse. If this situation changes I will update the installer to use a more stable source for this package. 
+
+If you want to add this PPA manually, run this command:
+
+    sudo apt-add-repository ppa:synapse-core/testing
+    sudo apt-get update
+
 ### Install packages ###
 
 This xmonad configuration uses a variety of different packages. Some of them are required for xmonad, others are not specific to xmonad but are core parts of the overall desktop configuration, and others are simply tools which I use frequently enough that my default configuration runs them on startup.
 
 If you want to install the entire list of packages, you can run the following command:
 
-    sudo apt-get install xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmobar xcompmgr nitrogen stalonetray moreutils synapse ssh-askpass-gnome thunar terminator remmina
+    sudo apt-get install xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmobar xcompmgr nitrogen stalonetray moreutils synapse consolekit ssh-askpass-gnome thunar terminator remmina
 
 If you prefer to pick and choose, the following packages can be omitted while still maintaining the overall functionality:
  * remmina
@@ -97,7 +109,7 @@ When you start xmonad for the first time, you're not looking at much. You will s
 
 There are no menus for selecting programs to run. Everything is launched in one of two ways:
 * `mod-shift-enter`: launches a terminal window (Terminator). You can run other programs from the terminal.
-* `mod-alt-space`: launches a Synapse prompt. You can run any program by starting to type its name, and then hitting enter once Synapse has found the program you want. 
+* `ctrl-space`: launches a Synapse prompt. You can run any program by starting to type its name, and then hitting enter once Synapse has found the program you want. 
 
 ### The status bar
 
@@ -127,8 +139,8 @@ There are six main layouts I have provided in my configuration:
 2. **Mirror ResizableTall** is similar to the first layout, but the larger master pane is at the top, and the remaining windows tile at the bottom of the screen. By default each area takes up half the screen, but this layout can also be resized.
 3. **Full** layout makes every window full screen with no borders. When you cycle through the windows, as each window becomes active it will be brought to the front. 
 4. **Grid** layout tries to equally distribute windows in the available space, increasing the number of columns and rows as necessary. The master pane is at top left, but does not get priority over other windows in any other way. Not a resizeable layout.
-5. **ThreeCol** layout puts the large master pane in the center of the screen taking up most of the available screen space. Remaining windows tile to both the left and right of the master pane. This layout is resizeable.
-6. **Circle** layout places the master pane in the center of the screen, with space on all sides. Remaining windows appear positioned in a circle around it, partially overlapping it. The focused window is brought to the front so you can see all of its contents. Not a resizable layout. 
+5. **ThreeCol** layout puts the large master pane in the center of the screen taking up most of the available screen space. Remaining windows tile to both the left and right of the master pane. This layout is resizeable. **NOTE:** I found myself using this rarely so I commented it in the xmonad.hs. To try it, uncomment the line referring to ThreeColMid in the list of layouts in xmonad.hs.
+6. **Circle** layout places the master pane in the center of the screen, with space on all sides. Remaining windows appear positioned in a circle around it, partially overlapping it. The focused window is brought to the front so you can see all of its contents. Not a resizable layout. **NOTE:** I found myself using this rarely so I commented it in the xmonad.hs. To try it, uncomment the line referring to Circle in the list of layouts in xmonad.hs. 
 
 In addition to the six main layouts, there is also a special layout called **IM Grid**, which is only activated on the Chat workspace. See the Workspaces section for more information.
 
@@ -331,9 +343,28 @@ In particular I have noticed problems with machines that have more than one soun
 Other Notes
 -----------
 
-### GIMP 2.8 ###
+### Synapse Activation Key Bug ###
 
-If you are a user of GIMP, you may find the GIMP experience in xmonad somewhat lacking while using version 2.6 (which is what Ubuntu 12.04 comes with by default). This is because xmonad tries to manage all your palettes as tiles which can lead to a somewhat confusing interface. However, with GIMP 2.8, single-window mode has been introduced. This is ideal for using GIMP under xmonad, so upgrading is highly recommended.
+As of this writing, the current version of Synapse has a bug which prevents you from changing the activation key. You can change it, but when you quit and restart Synapse or restart you computer it will revert to the default Ctrl-Space.
+
+### Preventing Nautilus From Showing The Desktop ###
+
+When you launch Nautilus (aka "Files") in order to browse the filesystem, it activates some parts of the Gnome desktop. For the most part this is fine, but one annoying side effect is that you may find your Gnome desktop showing up, complete with its background and icons for anything in your Desktop folder. Ugh! 
+
+Luckily, there is a way to prevent this. However, if you are still using Unity or Gnome as well as Xmonad, this change will cause your desktop to disappear when in those environments too, so be aware!
+
+You'll need to change some Gnome settings using a tool called `dconf-editor`. To install and launch the tool:
+
+    sudo apt-get install dconf-tools
+    dconf-editor
+
+Once you're in `dconf-editor`, navigate to this node: org -> gnome -> desktop -> background. Then uncheck the settings "draw background" and "show desktop icons".
+
+### GIMP 2.8 and Single Window Mode ###
+
+If you are a user of GIMP, you may have found the GIMP experience in xmonad somewhat lacking while using versions before 2.8. This is because xmonad tries to manage all your palettes as tiles which can lead to a somewhat confusing interface. However, with GIMP 2.8 (the default version in Ubuntu 14.04), single-window mode has been introduced.
+
+It's highly recommended to turn single window mode on when using Gimp. In the "Windows" menu, choose "Single-Window Mode" to activate it.
 
 ### Video Drivers ###
 
