@@ -203,11 +203,12 @@ myKeyBindings =
     ((myModMask, xK_b), sendMessage ToggleStruts)
     -- launch a terminal
     , ((myModMask, xK_t), spawn myTerminal)
-    , ((myModMask, xK_t), spawn myTerminal)
     , ((myModMask, xK_k), kill)
+    -- Rotate through the available layout algorithms
     , ((myModMask, xK_o), windows W.focusDown)
     , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
+    , ((myModMask, xK_space), sendMessage NextLayout)
     -- lock screen
     , ((myModMask, xK_l), spawn "slock")
     -- h and l hopefully
