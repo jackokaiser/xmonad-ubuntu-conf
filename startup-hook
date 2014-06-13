@@ -35,7 +35,10 @@ fi
 # deamon for automounting usb
 nautilus --no-desktop -n &
 # deamon for coding when it's dark!
-redshift &
+redshift -l -37.818463:144.987152 &
+
+# enable 2 fingers horizontal scrolling
+synclient HorizTwoFingerScroll=1
 
 # # Run emacs! we are here to dev FFS
 # if [ -z "$(pgrep emacs)" ] ; then
