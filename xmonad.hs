@@ -289,6 +289,7 @@ myManagementHooks = [
   , (className =? "Empathy") --> doF (W.shift "7:Chat")
   , (className =? "Pidgin") --> doF (W.shift "7:Chat")
   , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
+  , (className =? "emacs") --> doF (W.shift "5:Dev")
   ]
 
 
