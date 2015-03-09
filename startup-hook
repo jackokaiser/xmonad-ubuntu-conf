@@ -25,7 +25,7 @@ fi
 # deamon for automounting usb
 nautilus --no-desktop -n &
 # deamon for coding when it's dark!
-redshift -l -37.818463:144.987152 &
+redshift -l 45.1972725:5.7386923 &
 
 # enable 2 fingers horizontal scrolling
 synclient HorizTwoFingerScroll=1
