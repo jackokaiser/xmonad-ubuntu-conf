@@ -93,3 +93,5 @@ setxkbmap fr
 # # device
 # TOUCHPAD_ID=`xinput | grep 'Synaptics TouchPad' | cut -f 2 | cut -f 2 -d =`
 # xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
+
+xrandr --output VGA1 --auto --left-of eDP1

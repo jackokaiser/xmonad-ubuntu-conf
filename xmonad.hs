@@ -226,12 +226,18 @@ myKeyBindings =
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
     , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
     , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
-     --take a screenshot of entire display
    , ((myModMask , xK_Print ), spawn "scrot screen_%Y-%m-%d-%H-%M-%S.png -d 1  -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
-
    --take a screenshot of focused window
    , ((myModMask .|. controlMask, xK_Print ), spawn "scrot window_%Y-%m-%d-%H-%M-%S.png -d 1-u -e ''mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
   ]
+  ++
+    -- mod-{w,e,r} %! Switch to physical/Xinerama screens 1, 2, or 3
+    -- mod-shift-{w,e,r} %! Move client to screen 1, 2, or 3
+  [((m .|. myModMask, key), screenWorkspace sc >>= flip whenJust (windows . f))
+        | (key, sc) <- zip [xK_z, xK_a, xK_e] [0..]
+      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+     --take a screenshot of entire display
+
 
 
 {-
