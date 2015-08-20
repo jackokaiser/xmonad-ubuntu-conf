@@ -95,3 +95,9 @@ setxkbmap fr
 # xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
 
 xrandr --output VGA1 --auto --left-of eDP1
+cat .skype-credential | skype --pipelogin
+
+# Empathy chat client (-h: start hidden, -n: don't connect on launch)
+if [ -z "$(pgrep empathy)" ] ; then
+    empathy -h -n &
+fi
