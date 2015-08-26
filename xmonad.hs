@@ -173,7 +173,6 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- layouts.
 myLayouts =
   onWorkspace "7:Chat" chatLayout
-  $ onWorkspace "9:Pix" gimpLayout
   $ defaultLayouts
 
 
@@ -295,7 +294,8 @@ myManagementHooks = [
   , (className =? "Empathy") --> doF (W.shift "7:Chat")
   , (className =? "Pidgin") --> doF (W.shift "7:Chat")
   , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
-  , (className =? "emacs") --> doF (W.shift "5:Dev")
+  , (className =? "Thunderbird") --> doF (W.shift "9:Pix")
+  , (className =? "Skype") --> doF (W.shift "0:VM")
   ]
 
 

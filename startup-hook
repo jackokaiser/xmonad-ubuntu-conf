@@ -37,6 +37,9 @@ nautilus --no-desktop -n &
 # deamon for coding when it's dark!
 redshift -l 45.1972725:5.7386923 &
 
+thunderbird &
+cat .skype-credential | skype --pipelogin &
+
 # enable 2 fingers horizontal scrolling
 synclient HorizTwoFingerScroll=1
 
@@ -51,7 +54,7 @@ synclient HorizTwoFingerScroll=1
 
 
 # activate num pad
-xdotool key Num_Lock
+# xdotool key Num_Lock
 
 # set french keyboard layout
 setxkbmap fr
@@ -95,4 +98,3 @@ setxkbmap fr
 # xinput set-prop $TOUCHPAD_ID "Device Enabled" 0
 
 xrandr --output VGA1 --auto --left-of eDP1
-cat .skype-credential | skype --pipelogin
