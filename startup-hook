@@ -99,4 +99,4 @@ setxkbmap fr
 
 # to list screen names:
 # xrandr -q
-xrandr --output DP2-3 --auto --rotate left --left-of eDP1
+xrandr --output DP2-2 --auto --rotate left --left-of eDP1
