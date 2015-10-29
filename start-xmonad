@@ -48,7 +48,7 @@ xrandr | grep 'VGA-1 connected' | ifne xrandr --output VGA-1 --auto --left-of LV
 xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --left-of LVDS-1
 
 # to list screen names:
-xrandr --output DP2-2 --auto --rotate left --left-of eDP1
+xrandr --output DP2-2 --auto --rotate normal --left-of eDP1
 
 #
 # LOAD SCREEN BACKGROUNDS
