@@ -39,6 +39,7 @@ redshift -l 45.1972725:5.7386923 &
 
 thunderbird &
 cat .skype-credential | skype --pipelogin &
+mendeley &
 
 # enable 2 fingers horizontal scrolling
 synclient HorizTwoFingerScroll=1

@@ -296,6 +296,7 @@ myManagementHooks = [
   , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
   , (className =? "Thunderbird") --> doF (W.shift "9:Pix")
   , (className =? "Skype") --> doF (W.shift "0:VM")
+  , (className =? "mendeleydesktop.x86_64") --> doF (W.shift "7:Chat")
   ]
 
 
