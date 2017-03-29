@@ -90,13 +90,13 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
+    "7:Mendeley",  "8:Dbg", "9:Thunderbird",
     "4:Docs",  "5:Dev", "6:Web",
     "1:Term",  "2:Serv", "3:Client",
-    "0:VM",    "Extr1", "Extr2"
+    "0:Skype",    "Extr1", "Extr2"
   ]
 
-startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
+startupWorkspace = "1:Term"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -159,7 +159,14 @@ defaultLayouts = smartBorders(avoidStruts(
 -- identified using the myIMRosterTitle variable, and by default is
 -- configured for Pidgin, so if you're using something else you
 -- will want to modify that variable.
-chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
+-- chatLayout = avoidStruts(withIM (1%7) (Title myIMRosterTitle) Grid)
+
+-- Another IM layout, for use with Skype.
+skypeLayout = withIM (1/6) skypeMainWindow Grid
+skypeMainWindow = (And (Resource "skype")
+                       (Not (Or (Title "Transferts de fichiers")
+                                (Role "ConversationsWindow"))))
+
 
 -- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
 -- floating panels approach is a bit of a challenge to handle with xmonad;
@@ -172,7 +179,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "7:Chat" chatLayout
+  onWorkspace "0:Skype" skypeLayout
   $ defaultLayouts
 
 
@@ -218,6 +225,7 @@ myKeyBindings =
     -- , ((myModMask, xK_r), sendMessage MirrorExpand)
     , ((myModMask, xK_u), focusUrgent)
     , ((myModMask, xK_F1), spawn "nautilus")
+    -- , ((myModMask, xK_F2), spawn "vivaldi")
     , ((myModMask, xK_F2), spawn "google-chrome")
     , ((myModMask, xK_F3), spawn "synapse")
     , ((myModMask, xK_F11), spawn "emacs")
@@ -291,12 +299,9 @@ myManagementHooks = [
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_find2") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
-  , (className =? "Empathy") --> doF (W.shift "7:Chat")
-  , (className =? "Pidgin") --> doF (W.shift "7:Chat")
-  , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
-  , (className =? "Thunderbird") --> doF (W.shift "9:Pix")
-  , (className =? "Skype") --> doF (W.shift "0:VM")
-  , (className =? "mendeleydesktop.x86_64") --> doF (W.shift "7:Chat")
+  , (className =? "Thunderbird") --> doF (W.shift "9:Thunderbird")
+  , (className =? "Skype") --> doF (W.shift "0:Skype")
+  , (className =? "Mendeley Desktop") --> doF (W.shift "7:Mendeley")
   ]
 
 
