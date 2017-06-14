@@ -93,7 +93,7 @@ myWorkspaces =
     "7:Mendeley",  "8:Dbg", "9:Thunderbird",
     "4:Docs",  "5:Dev", "6:Web",
     "1:Term",  "2:Serv", "3:Client",
-    "0:Skype",    "Extr1", "Extr2"
+    "0:Chat",    "Extr1", "Extr2"
   ]
 
 startupWorkspace = "1:Term"  -- which workspace do you want to be on after launch?
@@ -178,9 +178,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
-myLayouts =
-  onWorkspace "0:Skype" skypeLayout
-  $ defaultLayouts
+myLayouts = defaultLayouts
 
 
 {-
@@ -300,7 +298,8 @@ myManagementHooks = [
   , (className =? "Komodo IDE" <&&> resource =? "Komodo_gotofile") --> doFloat
   , (className =? "Komodo IDE" <&&> resource =? "Toplevel") --> doFloat
   , (className =? "Thunderbird") --> doF (W.shift "9:Thunderbird")
-  , (className =? "Skype") --> doF (W.shift "0:Skype")
+  , (className =? "Skype") --> doF (W.shift "0:Chat")
+  , (className =? "Slack") --> doF (W.shift "0:Chat")
   , (className =? "Mendeley Desktop") --> doF (W.shift "7:Mendeley")
   ]
 

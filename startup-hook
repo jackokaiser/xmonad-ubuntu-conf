@@ -38,7 +38,8 @@ nautilus --no-desktop -n &
 redshift -l 45.1972725:5.7386923 &
 
 thunderbird &
-cat .skype-credential | skype --pipelogin &
+# cat .skype-credential | skype --pipelogin &
+slack &
 mendeley &
 
 # enable 2 fingers horizontal scrolling
