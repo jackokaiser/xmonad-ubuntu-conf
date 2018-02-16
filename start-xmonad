@@ -37,18 +37,13 @@ xcompmgr -n &
 # connected screens and find out what names you should use to refer to them.
 
 # Activate primary screen
-xrandr --output LVDS-1 --auto --primary
+MAIN_SCREEN=eDP-1-1
+SECOND_SCREEN=DP-1-2-2
+xrandr --output ${MAIN_SCREEN} --auto --primary
 
 # If we find that a screen is connected via VGA, activate it and position it
 # to the left of the primary screen.
-xrandr | grep 'VGA-1 connected' | ifne xrandr --output VGA-1 --auto --left-of LVDS-1
-
-# If we find that a screen is connected via DVI, activate it and position it
-# to the left of the primary screen.
-xrandr | grep 'DP-1 connected' | ifne xrandr --output DP-1 --auto --left-of LVDS-1
-
-# to list screen names:
-xrandr --output DP2-2 --auto --rotate normal --left-of eDP1
+xrandr | grep "${SECOND_SCREEN} connected" | ifne xrandr --output ${SECOND_SCREEN} --auto --left-of ${MAIN_SCREEN}
 
 #
 # LOAD SCREEN BACKGROUNDS

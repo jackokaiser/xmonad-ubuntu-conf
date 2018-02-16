@@ -222,7 +222,7 @@ myKeyBindings =
     -- , ((myModMask, xK_e), sendMessage MirrorShrink)
     -- , ((myModMask, xK_r), sendMessage MirrorExpand)
     , ((myModMask, xK_u), focusUrgent)
-    , ((myModMask, xK_F1), spawn "nautilus")
+    , ((myModMask, xK_F1), spawn "pcmanfm")
     -- , ((myModMask, xK_F2), spawn "vivaldi")
     , ((myModMask, xK_F2), spawn "google-chrome")
     , ((myModMask, xK_F3), spawn "synapse")

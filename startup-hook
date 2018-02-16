@@ -56,7 +56,7 @@ synclient HorizTwoFingerScroll=1
 
 
 # activate num pad
-# xdotool key Num_Lock
+xdotool key Num_Lock
 
 # set french keyboard layout
 setxkbmap fr
