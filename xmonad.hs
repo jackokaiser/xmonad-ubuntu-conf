@@ -208,7 +208,7 @@ myKeyBindings =
     -- , ((myModMask, xK_r), sendMessage MirrorExpand)
     , ((myModMask, xK_u), focusUrgent)
     , ((myModMask, xK_F1), spawn "nautilus")
-    , ((myModMask, xK_F2), spawn "google-chrome")
+    , ((myModMask, xK_F2), spawn "firefox")
     , ((myModMask, xK_F3), spawn "synapse")
     , ((myModMask, xK_F11), spawn "emacs")
     , ((myModMask, xK_F12), spawn myTerminal)
