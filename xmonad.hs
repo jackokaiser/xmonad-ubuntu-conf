@@ -84,10 +84,10 @@ myUrgentWSRight = "}"
 
 myWorkspaces =
   [
-    "7:Chat",  "8:Dbg", "9:Pix",
+    "7:Paper",  "8:Dbg", "9:Pix",
     "4:Docs",  "5:Dev", "6:Web",
     "1:Term",  "2:Serv", "3:Client",
-    "0:VM",    "Extr1", "Extr2"
+    "0:Chat",    "Extr1", "Extr2"
   ]
 
 startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
@@ -161,7 +161,7 @@ gimpLayout = smartBorders(avoidStruts(ThreeColMid 1 (3/100) (3/4)))
 -- Here we combine our default layouts with our specific, workspace-locked
 -- layouts.
 myLayouts =
-  onWorkspace "7:Chat" chatLayout
+  onWorkspace "0:Chat" chatLayout
   $ onWorkspace "9:Pix" gimpLayout
   $ defaultLayouts
 
@@ -208,7 +208,7 @@ myKeyBindings =
     -- , ((myModMask, xK_r), sendMessage MirrorExpand)
     , ((myModMask, xK_u), focusUrgent)
     , ((myModMask, xK_F1), spawn "nautilus")
-    , ((myModMask, xK_F2), spawn "firefox")
+    , ((myModMask, xK_F2), spawn "google-chrome")
     , ((myModMask, xK_F3), spawn "synapse")
     , ((myModMask, xK_F11), spawn "emacs")
     , ((myModMask, xK_F12), spawn myTerminal)
@@ -272,7 +272,7 @@ myManagementHooks = [
   , resource =? "stalonetray" --> doIgnore
   , className =? "rdesktop" --> doFloat
   , className =? "Gnome-calculator" --> doFloat
-  , (className =? "Slack") --> doF (W.shift "7:Chat")
+  , (className =? "Slack") --> doF (W.shift "0:Chat")
   , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
   , (className =? "emacs") --> doF (W.shift "5:Dev")
   ]
