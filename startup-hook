@@ -22,9 +22,6 @@ if [ -z "$(pgrep system-config-printer-applet)" ] ; then
     system-config-printer-applet &
 fi
 
-# deamon for automounting usb
-nautilus --no-desktop -n &
-
 # deamon for coding when it's dark!
 redshift -l 45.1972725:5.7386923 &
 
