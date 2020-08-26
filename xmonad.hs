@@ -150,12 +150,6 @@ defaultLayouts = smartBorders(avoidStruts(
 -- We are just running Slack on the chat layout. Full screen it.
 chatLayout = avoidStruts(noBorders Full)
 
--- Another IM layout, for use with Skype.
-skypeLayout = withIM (1/6) skypeMainWindow Grid
-skypeMainWindow = (And (Resource "skype")
-                       (Not (Or (Title "Transferts de fichiers")
-                                (Role "ConversationsWindow"))))
-
 -- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
 -- floating panels approach is a bit of a challenge to handle with xmonad;
 -- I find the best solution is to make the image you are working on the
