@@ -28,8 +28,8 @@ redshift -l 45.1972725:5.7386923 &
 # enable 2 fingers horizontal scrolling
 synclient HorizTwoFingerScroll=1
 
-# activate num pad
-xdotool key Num_Lock
+# # activate num pad
+/usr/bin/numlockx on
 
 # set french keyboard layout
 setxkbmap fr
