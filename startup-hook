@@ -22,21 +22,14 @@ if [ -z "$(pgrep system-config-printer-applet)" ] ; then
     system-config-printer-applet &
 fi
 
+# deamon for automounting usb
+nautilus --no-desktop -n &
+
 # deamon for coding when it's dark!
 redshift -l 45.1972725:5.7386923 &
 
 # enable 2 fingers horizontal scrolling
 synclient HorizTwoFingerScroll=1
-
-# # Run emacs! we are here to dev FFS
-# if [ -z "$(pgrep emacs)" ] ; then
-#     emacs &
-# fi
-# Run a terminal by default on login
-# if [ -z "$(pgrep terminator)" ] ; then
-#     terminator &
-# fi
-
 
 # activate num pad
 xdotool key Num_Lock

@@ -90,7 +90,7 @@ myWorkspaces =
     "0:Chat",    "Extr1", "Extr2"
   ]
 
-startupWorkspace = "5:Dev"  -- which workspace do you want to be on after launch?
+startupWorkspace = "1:Term"  -- which workspace do you want to be on after launch?
 
 {-
   Layout configuration. In this section we identify which xmonad
@@ -149,6 +149,12 @@ defaultLayouts = smartBorders(avoidStruts(
 
 -- We are just running Slack on the chat layout. Full screen it.
 chatLayout = avoidStruts(noBorders Full)
+
+-- Another IM layout, for use with Skype.
+skypeLayout = withIM (1/6) skypeMainWindow Grid
+skypeMainWindow = (And (Resource "skype")
+                       (Not (Or (Title "Transferts de fichiers")
+                                (Role "ConversationsWindow"))))
 
 -- The GIMP layout uses the ThreeColMid layout. The traditional GIMP
 -- floating panels approach is a bit of a challenge to handle with xmonad;
@@ -209,7 +215,7 @@ myKeyBindings =
     , ((myModMask, xK_u), focusUrgent)
     , ((myModMask, xK_F1), spawn "nautilus")
     , ((myModMask, xK_F2), spawn "google-chrome")
-    , ((myModMask, xK_F3), spawn "synapse")
+    , ((myModMask, xK_F4), spawn "synapse")
     , ((myModMask, xK_F11), spawn "emacs")
     , ((myModMask, xK_F12), spawn myTerminal)
     , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
@@ -274,7 +280,6 @@ myManagementHooks = [
   , className =? "Gnome-calculator" --> doFloat
   , (className =? "Slack") --> doF (W.shift "0:Chat")
   , (className =? "Gimp-2.8") --> doF (W.shift "9:Pix")
-  , (className =? "emacs") --> doF (W.shift "5:Dev")
   ]
 
 
