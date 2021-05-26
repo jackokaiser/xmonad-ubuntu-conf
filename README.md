@@ -1,9 +1,7 @@
 xmonad-ubuntu-conf
 ==================
 
-My xmonad config for Ubuntu 18.04, including package list, config files, and instructions. If you're on a different Ubuntu LTS release, take a look at the different branches available to see if there is one for you. The master branch is typically for the newest LTS.
-
-**Warning**: this is not yet thoroughly tested on 18.04. I had to make a few minor changes for Bionic, but I have only tried it out on one machine so far, and only in a single screen configuration. If you're on a single-screen configuration, give it a shot and let me know if it works for you! Things are still a bit... weird on multi-monitor setups.
+My xmonad config for Ubuntu 20.04 (Focal Fossa), including package list, config files, and instructions. If you're on a different Ubuntu LTS release, take a look at the different branches available to see if there is one for you. The master branch is typically for the newest LTS.
 
 Overview
 --------
@@ -22,6 +20,17 @@ This configuration has the following features and properties:
 * Adds xmonad as an option to your GDM3 login greeter
 * Wallpaper handling and support for basic transparency
 
+Update Notes
+------------
+
+**Warning**: this is not thoroughly tested on 20.04. I only had to make minor updates to make it work, but I no longer regularly use it on a multi-screen configuration so I'm not able to easily test it there.
+
+OH NO! I upgraded Ubuntu and everything broke!
+----------------------------------------------
+
+Perhaps you did a dist upgade to a new version of Ubuntu, and now when you get into Xmonad everything is a little... wonky. A likely cause of this is that the Xmonad session file which runs the configuration was reset to the package default. If so, you can fix this by copying my customized version of this file back into place.
+
+    sudo cp ~/.xmonad/xmonad.desktop /usr/share/xsessions/xmonad.desktop
 
 Installation
 ------------
@@ -54,7 +63,7 @@ This xmonad configuration uses a variety of different packages. Some of them are
 
 If you want to install the entire list of packages, you can run the following command:
 
-    sudo apt-get install xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmobar xcompmgr nitrogen stalonetray moreutils synapse ssh-askpass-gnome
+    sudo apt-get install xmonad libghc-xmonad-dev libghc-xmonad-contrib-dev xmobar xcompmgr nitrogen stalonetray moreutils synapse ssh-askpass-gnome suckless-tools
 
 If you prefer to pick and choose, the following packages can be omitted while still maintaining the overall functionality:
  * ssh-askpass-gnome
@@ -254,6 +263,13 @@ The following commands involve quitting or restarting xmonad:
 * `mod-shift-q`: quits xmonad, returning to the login screen. 
 * `mod-q`: restarts and recompiles xmonad. Does not require restarting any other programs you may be running, and happens very quickly. Very useful while experimenting with changes to your `xmonad.hs` file!
 
+### Locking your screen
+
+You can lock your screen using the following command:
+* `mod-shift-l`: runs `slock` screen locking program
+
+When the screen is locked, there won't be any interface shown for logging back in! Just type your password and hit enter to unlock the screen.
+
 Configuration
 -------------
 
@@ -295,10 +311,18 @@ Note that by default I have commented out the ssh keychain unlocking prompt, ass
 
 The `xmobarrc` file is used to configure the ovreall appearance of the status bar, as well as provide part of its content. You should consider editing it if you want to make any of the following kinds of changes:
 * you want to change the font or default colors used for the bar
-* you want to change the width or position of the bar (expect to also make changes to stalonetray in the `start-xmonad` file as well in this case
+* you want to change the width or position of the bar (expect to also make changes to `stalonetrayrc` as well in this case
 * you want to change the contents or formatting of the system information and/or date which is displayed near the right side of the status bar
 
 You can see whether the changes you have made to `xmobarrc` have been effective by recompiling xmonad using `mod-q`. This typically happens very quickly. If you try this and your status bar disappears, it means you made a syntax error in your configuration file. Undo the change and hit `mod-q` again to confirm things are working again.
+
+### Editing stalonetrayrc ###
+
+The `stalonetrayrc` file is used to configure the icon tray at the top right of your screen. You should consider editing it if:
+* you want to change the color or appearance of the tray
+* you need to tweak it to align it better with xmobar, or to prevent it from overlapping xmobar
+* you need to display more (or fewer) icons in the tray
+* You want to change the size of the icons
 
 ### Editing xmonad.hs ###
 

@@ -202,7 +202,7 @@ myKeyBindings =
     , ((myModMask, xK_z), sendMessage MirrorExpand)
     , ((myModMask, xK_space), sendMessage NextLayout)
     -- lock screen
-    , ((myModMask, xK_l), spawn "slock")
+    , ((myModMask .|. shiftMask, xK_l), spawn "slock")
     -- h and l hopefully
     -- , ((myModMask, xK_e), sendMessage MirrorShrink)
     -- , ((myModMask, xK_r), sendMessage MirrorExpand)
