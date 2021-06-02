@@ -34,6 +34,8 @@ synclient HorizTwoFingerScroll=1
 # set french keyboard layout
 setxkbmap fr
 
+copyq &
+
 #
 # APPLICATION LAUNCHER
 #
