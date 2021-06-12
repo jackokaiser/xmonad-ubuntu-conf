@@ -30,6 +30,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Actions.Plane
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
+import Graphics.X11.ExtraTypes.XF86
 import qualified XMonad.StackSet as W
 import qualified Data.Map as M
 import Data.Ratio ((%))
@@ -212,9 +213,9 @@ myKeyBindings =
     , ((myModMask, xK_F4), spawn "synapse")
     , ((myModMask, xK_F11), spawn "emacs")
     , ((myModMask, xK_F12), spawn myTerminal)
-    , ((0, 0x1008FF12), spawn "amixer -q set Master toggle")
-    , ((0, 0x1008FF11), spawn "amixer -q set Master 10%-")
-    , ((0, 0x1008FF13), spawn "amixer -q set Master 10%+")
+    , ((0, xF86XK_AudioMute), spawn "amixer -D pulse set Master toggle")
+    , ((0, xF86XK_AudioLowerVolume), spawn "amixer -D pulse sset Master 10%-")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "amixer -D pulse sset Master 10%+")
      --take a screenshot of entire display
    , ((myModMask , xK_Print ), spawn "scrot screen_%Y-%m-%d-%H-%M-%S.png -d 1  -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
 
