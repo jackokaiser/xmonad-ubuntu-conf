@@ -197,10 +197,10 @@ myKeyBindings =
     -- launch a terminal
     , ((myModMask, xK_t), spawn myTerminal)
     , ((myModMask, xK_k), kill)
-    -- Rotate through the available layout algorithms
     , ((myModMask, xK_o), windows W.focusDown)
-    , ((myModMask, xK_a), sendMessage MirrorShrink)
+    -- , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
+    -- Rotate through the available layout algorithms
     , ((myModMask, xK_space), sendMessage NextLayout)
     -- lock screen
     , ((myModMask .|. shiftMask, xK_l), spawn "slock")
@@ -216,8 +216,10 @@ myKeyBindings =
     , ((0, xF86XK_AudioMute), spawn "amixer -D pulse set Master toggle")
     , ((0, xF86XK_AudioLowerVolume), spawn "amixer -D pulse sset Master 10%-")
     , ((0, xF86XK_AudioRaiseVolume), spawn "amixer -D pulse sset Master 10%+")
+    , ((0, xF86XK_MonBrightnessUp), spawn "lux -a 10%")
+    , ((0, xF86XK_MonBrightnessDown), spawn "lux -s 10%")
      --take a screenshot of entire display
-   , ((myModMask , xK_Print ), spawn "scrot screen_%Y-%m-%d-%H-%M-%S.png -d 1  -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
+   , ((myModMask , xK_Print ), spawn "scrot screen_%Y-%m-%d-%H-%M-%S.png -d 1 -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && gthumb ~/Pictures/screenshots/$f'")
 
    --take a screenshot of focused window
    , ((myModMask .|. controlMask, xK_Print ), spawn "scrot window_%Y-%m-%d-%H-%M-%S.png -d 1-u -e ''mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots/$f && shotwell ~/Pictures/screenshots/$f'")
@@ -329,7 +331,7 @@ myKeys = myKeyBindings ++
   [
     ((m .|. myModMask, key), screenWorkspace sc
       >>= flip whenJust (windows . f))
-      | (key, sc) <- zip [xK_w, xK_e, xK_r] [1,0,2]
+      | (key, sc) <- zip [xK_z, xK_a, xK_e] [1,0,2]
       , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
   ]
 
