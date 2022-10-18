@@ -195,8 +195,8 @@ myKeyBindings =
   [
     ((myModMask, xK_b), sendMessage ToggleStruts)
     -- launch a terminal
-    , ((myModMask, xK_t), spawn myTerminal)
     , ((myModMask, xK_k), kill)
+    , ((myModMask, xK_t), withFocused $ windows . W.sink) -- %! Push window back into tiling
     , ((myModMask, xK_o), windows W.focusDown)
     -- , ((myModMask, xK_a), sendMessage MirrorShrink)
     , ((myModMask, xK_z), sendMessage MirrorExpand)
