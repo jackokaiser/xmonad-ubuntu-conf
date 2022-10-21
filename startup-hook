@@ -22,6 +22,9 @@ if [ -z "$(pgrep system-config-printer-applet)" ] ; then
 	system-config-printer-applet &
 fi
 
+# Start Bluetooth Manager Applet
+blueman-applet &
+
 # deamon for coding when it's dark!
 redshift -l 45.1972725:5.7386923 &
 
