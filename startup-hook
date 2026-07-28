@@ -25,6 +25,11 @@ fi
 # Start Bluetooth Manager Applet
 blueman-applet &
 
+# Automatically lock the screen with slock after 3 minutes of inactivity
+if [ -z "$(pgrep xautolock)" ] ; then
+	xautolock -time 3 -locker slock &
+fi
+
 # deamon for coding when it's dark!
 redshift -l 45.1972725:5.7386923 &
 
