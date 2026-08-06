@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# xautolock only tracks X11 keyboard/mouse idle time, so it will still
+# lock the screen mid video-call (mic/camera active, but no keyboard
+# or mouse input). This loop disables xautolock while the microphone
+# or webcam is actively in use, and re-enables it otherwise.
+#
+# IMPORTANT: xautolock -enable resets its idle countdown even when
+# already enabled, so we must only send -disable/-enable on an actual
+# state change, never on every poll (otherwise auto-locking never
+# fires at all, in or out of a call).
+
+was_busy=0
+
+while true; do
+	if pactl list source-outputs short 2>/dev/null | grep -q . \
+		|| fuser /dev/video0 /dev/video1 >/dev/null 2>&1; then
+		if [ "$was_busy" -eq 0 ]; then
+			xautolock -disable
+			was_busy=1
+		fi
+	else
+		if [ "$was_busy" -eq 1 ]; then
+			xautolock -enable
+			was_busy=0
+		fi
+	fi
+	sleep 15
+done

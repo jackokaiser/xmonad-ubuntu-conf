@@ -30,6 +30,11 @@ if [ -z "$(pgrep xautolock)" ] ; then
 	xautolock -time 3 -locker slock &
 fi
 
+# Suppress the above while the mic/webcam is in use (e.g. video calls)
+if [ -z "$(pgrep -f xautolock-guard)" ] ; then
+	~/.xmonad/xautolock-guard &
+fi
+
 # deamon for coding when it's dark!
 redshift -l 45.1972725:5.7386923 &
 
