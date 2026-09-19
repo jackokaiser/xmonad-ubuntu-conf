@@ -36,7 +36,7 @@ if [ -z "$(pgrep -f xautolock-guard)" ] ; then
 fi
 
 # deamon for coding when it's dark!
-redshift -l 45.1972725:5.7386923 &
+redshift -l 46.6:2.5 &
 
 # enable 2 fingers horizontal scrolling
 synclient HorizTwoFingerScroll=1
